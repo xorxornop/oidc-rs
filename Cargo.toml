@@ -1,0 +1,42 @@
+[package]
+name = "oidc-rs"
+version = "0.1.0"
+authors = ["Matthew Ducker <mduckernz@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/xorxornop/oidc-rs"
+keywords = ["openid", "oauth2", "connect"]
+categories = ["authentication", "database", "web-programming", "web-programming::http-server"]
+license = "Apache-2.0"
+
+[features]
+default = ["sqlite"]
+sqlite = ["diesel/sqlite", "diesel_codegen/sqlite", "libsqlite3-sys"]
+postgres = ["diesel/postgres", "diesel_codegen/postgres"]
+dev = [] # Used to enable additional functionality for developer convenience, such as verbose logging
+
+[dependencies]
+#rocket = { version = "0.3.3", features = ["tls"] }
+rocket = "0.3.3"
+rocket_codegen = "0.3.3"
+#diesel = { version = "0.16.0", features = ["sqlite", "postgres"] }
+#diesel_codegen = { version = "0.16.0", features = ["sqlite", "postgres"] }
+diesel = { version = "0.16.0", features = ["chrono", "serde_json", "uuid", "network-address", "numeric"] }
+diesel_codegen = { version = "0.16.0", features = [] }
+r2d2 = "0.7.4"
+r2d2-diesel = "0.16.0"
+log = "0.3"
+dotenv = "0.9.0"
+chrono = { version = "0.4", features = ["serde"] }
+
+# Used to prevent linking errors on Windows:
+# Overrides Diesel's libsqlite3-sys dependency.
+libsqlite3-sys = { version = "0.8.1", optional = true, features = ["bundled"] }
+
+[dev-dependencies]
+rocket = "0.3.3"
+diesel = { version = "0.16.0", features = ["sqlite"] }
+diesel_codegen = { version = "0.16.0", features = ["sqlite"] }
+
+# Used to prevent linking errors on Windows:
+# Overrides Diesel's libsqlite3-sys dependency.
+libsqlite3-sys = { version = "0.8.1", features = ["bundled"] }
