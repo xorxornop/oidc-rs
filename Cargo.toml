@@ -27,6 +27,9 @@ r2d2-diesel = "0.16.0"
 log = "0.3"
 dotenv = "0.9.0"
 chrono = { version = "0.4", features = ["serde"] }
+serde = "1.0.17"
+serde_derive = "1.0.17"
+serde_json = "1.0.5"
 
 # Used to prevent linking errors on Windows:
 # Overrides Diesel's libsqlite3-sys dependency.

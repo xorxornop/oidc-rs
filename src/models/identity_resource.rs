@@ -1,8 +1,9 @@
 use std::vec::Vec;
+
 use super::resource::Resource;
 
 /// Models a user identity resource.
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct IdentityResource {
     /// Indicates if this resource is enabled. Defaults to true.
     enabled: bool,

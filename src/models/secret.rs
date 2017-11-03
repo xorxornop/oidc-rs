@@ -1,7 +1,7 @@
 use chrono::{DateTime, Utc};
 
 /// Models a client secret with identifier and expiration
-#[derive(Debug, PartialEq, Eq, Hash)]
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct Secret {
     /// The description
     description: String,
@@ -31,7 +31,7 @@ impl Secret {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Hash)]
+#[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum SecretType {
     SharedSecret,
     X509Thumbprint,

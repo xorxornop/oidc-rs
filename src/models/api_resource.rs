@@ -5,7 +5,7 @@ use super::secret::Secret;
 use super::scope::Scope;
 
 /// Models a web API resource.
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ApiResource {
     /// Indicates if this resource is enabled. Defaults to true.
     enabled: bool,

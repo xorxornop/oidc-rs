@@ -2,8 +2,8 @@ use std::vec::Vec;
 use std::option::Option;
 use chrono::{DateTime, Utc};
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-struct Consent {
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Consent {
     /// The subject identifier
     subject_id: String,
 

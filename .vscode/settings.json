@@ -1,6 +1,8 @@
 {
     "rust.rustup": {
-        "toolchain": "nightly-x86_64-pc-windows-msvc",
-        "nightlyToolchain": "nightly-x86_64-pc-windows-msvc"
+        //"toolchain": "nightly-x86_64-pc-windows-msvc",
+        //"nightlyToolchain": "nightly-x86_64-pc-windows-msvc",
+        "toolchain": "nightly-x86_64-apple-darwin",
+        "nightlyToolchain": "nightly-x86_64-apple-darwin"
     }
 }

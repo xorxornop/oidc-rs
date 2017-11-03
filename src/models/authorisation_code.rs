@@ -1,7 +1,7 @@
 use chrono::{DateTime, Utc};
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-struct AuthorisationCode {
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct AuthorisationCode {
     /// The creation time
     creation_time: DateTime<Utc>,
 

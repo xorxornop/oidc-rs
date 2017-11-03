@@ -7,8 +7,15 @@ extern crate rocket;
 
 #[macro_use] extern crate diesel;
 #[macro_use] extern crate diesel_codegen;
+
 extern crate r2d2_diesel;
 extern crate r2d2;
+
+#[macro_use] extern crate serde_derive;
+
+extern crate serde;
+extern crate serde_json;
+
 #[macro_use] extern crate log;
 
 extern crate chrono;
@@ -20,7 +27,7 @@ pub mod utils;
 
 // Code imports:
 
-use std::option;
+use std::option::Option;
 use std::result::Result;
 use std::result::Result::*;
 use std::vec::Vec;
@@ -77,6 +84,8 @@ trait OidcServiceInternal {
 
 impl OidcServiceInternal for Rocket {
     fn init_state(self) -> Self {
+        //rocket::fairing::AdHoc::
+
         // Attach a fairing which adds a database pool connection to the managed state:
         self.attach(rocket::fairing::AdHoc::on_attach(|rocket| {
             let db_url_result = {                

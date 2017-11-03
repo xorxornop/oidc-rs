@@ -1,4 +1,5 @@
 use std::str::FromStr;
+use std::string::ToString;
 use std::result::Result;
 use std::result::Result::{Ok, Err};
 
@@ -7,7 +8,16 @@ use utils::enum_parse_error::*;
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum TokenType {
     AccessToken,
-    IdentityToken   
+    IdentityToken
+}
+
+impl ToString for TokenType {
+    fn to_string(&self) -> String {
+        match *self {
+            TokenType::AccessToken => String::from("access_token"),
+            TokenType::IdentityToken => String::from("id_token")
+        }
+    }
 }
 
 impl FromStr for TokenType {

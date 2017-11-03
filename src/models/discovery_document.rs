@@ -1,6 +1,7 @@
 use std::option::Option;
 use std::vec::Vec;
 
+#[derive(Debug, Serialize, Deserialize)]
 pub struct DiscoveryDocument {
     issuer: String,
     jwks_uri: String,
