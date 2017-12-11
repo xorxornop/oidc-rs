@@ -20,13 +20,18 @@ pub mod utils;
 
 // Code imports:
 
-use std::option;
+use std::option::Option;
 use std::result::Result;
-use std::result::Result::*;
+//use std::result::Result::*;
 use std::vec::Vec;
 
 use rocket::{Rocket, Route};
-use diesel::sqlite::SqliteConnection;
+//use rocket::http::uri::URI;
+
+#[cfg(feature = "sqlite")] use diesel::sqlite::SqliteConnection;
+
+#[cfg(feature = "postgres")] use diesel::sqlite::PgConnection;
+
 use r2d2_diesel::ConnectionManager;
 
 // Library code:
@@ -67,6 +72,7 @@ impl OidcService for Rocket {
     }
 }
 
+/// Internal operations to start and manage an OpenID Connect service
 trait OidcServiceInternal {
     /// Initialise any shared state that the service needs for operation.
     fn init_state(self) -> Self;
@@ -123,9 +129,16 @@ fn get_routes() -> Vec<Route> {
 #[cfg(feature = "sqlite")]
 fn get_pool_sqlite(db_url: &str) -> r2d2::Pool<ConnectionManager<SqliteConnection>> {
     let config = r2d2::Config::default();
-    //let db_url = env!("OIDC_RS_DB_URL");
     let manager = ConnectionManager::<SqliteConnection>::new(db_url);
-    r2d2::Pool::new(config, manager).expect("db pool")
+    r2d2::Pool::new(config, manager).expect("failed to create db pool")
+}
+
+/// Get a pool connection manager to a sqlite database.
+#[cfg(feature = "postgres")]
+fn get_pool_postgres(db_url: &str) -> r2d2::Pool<ConnectionManager<PgConnection>> {
+    let config = r2d2::Config::default();
+    let manager = ConnectionManager::<PgConnection>::new(db_url);
+    r2d2::Pool::new(config, manager).expect("failed to create db pool")
 }
 
 #[cfg(feature = "dev")]
